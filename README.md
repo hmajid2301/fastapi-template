@@ -18,6 +18,7 @@ However there is nothing stopping you from using this with other projects.
   - Flake linter
   - isort import sorter
   - mypy type checker
+- Pytest for testing & coverage
 
 ## Usage
 
