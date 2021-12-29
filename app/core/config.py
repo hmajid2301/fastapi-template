@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     REGEX_CORS: Optional[str] = None
 
     class Config:
-        env_prefix = "[[service_name | upper | replace("-", "_")]]"
+        env_prefix = "[[service_prefix]]_"
         env_file = ".env"
 
     def get_mongodb_uri(self) -> str:

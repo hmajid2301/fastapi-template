@@ -16,8 +16,8 @@ ENV PYTHONUNBUFFERED=1 \
 	\
 	VENV_PATH="/opt/pysetup/.venv" \
 	\
-	[[service_name | upper | replace("-", "_")]]_WEB_HOST="0.0.0.0" \
-	[[service_name | upper | replace("-", "_")]]_WEB_PORT=8080
+	[[service_prefix]]_WEB_HOST="0.0.0.0" \
+	[[service_prefix]]_WEB_PORT=8080
 
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
@@ -35,22 +35,22 @@ RUN poetry install --no-dev
 
 FROM base as production
 
-ENV [[service_name | upper | replace("-", "_")]]_ENVIRONMENT=production
+ENV [[service_prefix]]_ENVIRONMENT=production
 COPY --from=builder $VENV_PATH $VENV_PATH
 COPY ./app /app/app
 
 WORKDIR /app
 EXPOSE 8080
-CMD uvicorn app:app --host ${[[service_name | upper | replace("-", "_")]]_WEB_HOST} --port ${[[service_name | upper | replace("-", "_")]]_WEB_PORT}
+CMD uvicorn app:app --host ${[[service_prefix]]_WEB_HOST} --port ${[[service_prefix]]_WEB_PORT}
 
 
 FROM builder as development
 
-ENV [[service_name | upper | replace("-", "_")]]_ENVIRONMENT=development
+ENV [[service_prefix]]_ENVIRONMENT=development
 
 COPY ./ /app
 RUN poetry install
 
 WORKDIR /app
 EXPOSE 8080
-CMD uvicorn --reload app:app --host ${[[service_name | upper | replace("-", "_")]]_WEB_HOST} --port ${[[service_name | upper | replace("-", "_")]]_WEB_PORT}
+CMD uvicorn --reload app:app --host ${[[service_prefix]]_WEB_HOST} --port ${[[service_prefix]]_WEB_PORT}

@@ -31,28 +31,28 @@ spec:
       timeoutSeconds: 300
       serviceAccountName: 78358389381-compute@developer.gserviceaccount.com
       containers:
-        - image: eu.gcr.io/[[gcp_project_id]]/[[service_name]]
+        - image: eu.gcr.io/banter-bus/[[service_name]]
           ports:
             - name: http1
               containerPort: 8080
           env:
-            - name: [[service_name | upper | replace("-", "_")]]_DB_USERNAME
+            - name: [[service_prefix]]_DB_USERNAME
               value: banter-bus
-            - name: [[service_name | upper | replace("-", "_")]]_DB_HOST
+            - name: [[service_prefix]]_DB_HOST
               value: banter-bus-database.ffljl.mongodb.net
-            - name: [[service_name | upper | replace("-", "_")]]_DB_NAME
-              value: [[db_name]]
-            - name: [[service_name | upper | replace("-", "_")]]_URL
+            - name: [[service_prefix]]_DB_NAME
+              value: [[database_name]]
+            - name: [[service_prefix]]_URL
               value: https://management.api.banterbus.games
-            - name: [[service_name | upper | replace("-", "_")]]_SCHEMA
+            - name: [[service_prefix]]_SCHEMA
               value: mongodb+srv
-            - name: [[service_name | upper | replace("-", "_")]]_ENVIRONMENT
+            - name: [[service_prefix]]_ENVIRONMENT
               value: production
-            - name: [[service_name | upper | replace("-", "_")]]_CORS
+            - name: [[service_prefix]]_CORS
               value: '["*"]'
-            - name: [[service_name | upper | replace("-", "_")]]_REGEX_CORS
+            - name: [[service_prefix]]_REGEX_CORS
               value: '[""]'
-            - name: [[service_name | upper | replace("-", "_")]]_DB_PASSWORD
+            - name: [[service_prefix]]_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: latest

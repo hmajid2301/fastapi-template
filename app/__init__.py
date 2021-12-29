@@ -1,6 +1,5 @@
 import uvicorn
 
-import app.room.room_event_handlers
 from app.core.config import get_settings
 from app.main import application
 
