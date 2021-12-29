@@ -1,12 +1,12 @@
 service_name:
   type: str
-  help: "Name of your project (lowercase, hyphens like 'banter-bus-api)"
+  help: Name of your project (lowercase, hyphens like 'banter-bus-api')
   default: banter-bus-api
 
 service_title:
   type: str
   help: "Title of your project (title case like 'Banter Bus API')"
-  default: "[[service_name | title | replace('-'', ' ')]]"
+  default: "[[service_name | title | replace('-', ' ')]]"
 
 service_prefix:
   type: str
@@ -16,18 +16,14 @@ service_prefix:
 database_name:
   type: str
   help: "Your database name (lowercase, hypens replaced with underscore and no banter-bus like 'api')"
-  default: "[[ service_name | replace('-', '_') | replace('banter_bus', '')]]"
+  default: "[[service_name | replace('-', '_') | replace('banter_bus', '')]]"
 
 short_description:
   type: str
   help: "A short description of the project"
 
 _exclude:
-  - "copier.yaml"
-  - "copier.yml"
-  - "~*"
-  - "__pycache__"
-  - ".DS_Store"
-  - ".git"
-  - "template.yml"
-  - docs
+  - copier.yaml
+  - __pycache__
+  - .git
+  - README.md

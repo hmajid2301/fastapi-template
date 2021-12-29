@@ -1,5 +1,5 @@
 {
-  "name": "[[service_name | title | replace('-', ' ')]]",
+  "name": "[[service_title]]",
   "shutdownAction": "stopCompose",
   "dockerComposeFile": ["../docker-compose.yml", "docker-compose.dev.yml"],
   "service": "api",
