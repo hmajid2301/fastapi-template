@@ -16,7 +16,7 @@ service_prefix:
 database_name:
   type: str
   help: "Your database name (lowercase, hypens replaced with underscore and no banter-bus like 'api')"
-  default: "[[service_name | replace('-', '_') | replace('banter_bus', '')]]"
+  default: "[[service_name | replace('-', '_') | replace('banter_bus_', '')]]"
 
 short_description:
   type: str
@@ -26,4 +26,3 @@ _exclude:
   - copier.yaml
   - __pycache__
   - .git
-  - README.md
