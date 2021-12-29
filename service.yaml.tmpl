@@ -1,0 +1,77 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: [[service_name]]
+  namespace: "78358389381"
+  selfLink: /apis/serving.knative.dev/v1/namespaces/78358389381/services/[[service_name]]
+  uid: 9ebf9146-a5ab-4be1-8473-928a98b3395a
+  resourceVersion: AAXUDQsOl90
+  creationTimestamp: [[iso_date]]
+  labels:
+    cloud.googleapis.com/location: europe-west1
+  annotations:
+    run.googleapis.com/client-name: cloud-console
+    serving.knative.dev/creator: hmajid2301@gmail.com
+    serving.knative.dev/lastModifier: hmajid2301@gmail.com
+    client.knative.dev/user-image: eu.gcr.io/banter-bus/[[service_name]]
+    run.googleapis.com/launch-stage: BETA
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+spec:
+  template:
+    metadata:
+      name: [[service_name]]
+      annotations:
+        run.googleapis.com/client-name: cloud-console
+        client.knative.dev/user-image: eu.gcr.io/banter-bus/[[service_name]]
+        run.googleapis.com/execution-environment: gen2
+        autoscaling.knative.dev/maxScale: "3"
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      serviceAccountName: 78358389381-compute@developer.gserviceaccount.com
+      containers:
+        - image: eu.gcr.io/[[gcp_project_id]]/[[service_name]]
+          ports:
+            - name: http1
+              containerPort: 8080
+          env:
+            - name: [[service_name | upper | replace("-", "_")]]_DB_USERNAME
+              value: banter-bus
+            - name: [[service_name | upper | replace("-", "_")]]_DB_HOST
+              value: banter-bus-database.ffljl.mongodb.net
+            - name: [[service_name | upper | replace("-", "_")]]_DB_NAME
+              value: [[db_name]]
+            - name: [[service_name | upper | replace("-", "_")]]_URL
+              value: https://management.api.banterbus.games
+            - name: [[service_name | upper | replace("-", "_")]]_SCHEMA
+              value: mongodb+srv
+            - name: [[service_name | upper | replace("-", "_")]]_ENVIRONMENT
+              value: production
+            - name: [[service_name | upper | replace("-", "_")]]_CORS
+              value: '["*"]'
+            - name: [[service_name | upper | replace("-", "_")]]_REGEX_CORS
+              value: '[""]'
+            - name: [[service_name | upper | replace("-", "_")]]_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: banter-bus-db-password
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+  traffic:
+    - percent: 100
+      latestRevision: true
+status:
+  conditions:
+    - type: Ready
+      status: "True"
+    - type: ConfigurationsReady
+      status: "True"
+    - type: RoutesReady
+      status: "True"
+  url: https://[[service_name]]-x6ccwlffzq-ew.a.run.app
+  address:
+    url: https://[[service_name]]-x6ccwlffzq-ew.a.run.app

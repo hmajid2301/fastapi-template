@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  api:
+    container_name: [[service_name]]
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    volumes:
+       - ./:/app
+    depends_on:
+      - database
+
+  database:
+    container_name: banter-bus-database
+    image: mongo:4.4.4
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=banterbus
+      - MONGO_INITDB_ROOT_PASSWORD=banterbus
+      - MONGO_INITDB_DATABASE=banterbus
+    volumes:
+      - /data/db
+    ports:
+      - 27017:27017
+
+  database-gui:
+    container_name: banter-bus-database-gui
+    image: mongoclient/mongoclient:4.0.1
+    depends_on:
+      - database
+    environment:
+      - MONGOCLIENT_DEFAULT_CONNECTION_URL=mongodb://banterbus:banterbus@banter-bus-database:27017
+    volumes:
+      - /data/db mongoclient/mongoclient
+    ports:
+      - 4000:3000

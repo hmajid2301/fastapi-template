@@ -1,0 +1,129 @@
+image: python:3.9.8
+
+variables:
+  DOCKER_DRIVER: overlay2
+  PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/pip"
+  PIP_DOWNLOAD_DIR: ".pip"
+  DOCKER_HOST: tcp://docker:2375
+  [[service_name | upper | replace("-", "_")]]_DB_USERNAME: banterbus
+  [[service_name | upper | replace("-", "_")]]_DB_PASSWORD: banterbus
+  [[service_name | upper | replace("-", "_")]]_DB_HOST: banter-bus-database
+  [[service_name | upper | replace("-", "_")]]_DB_PORT: 27017
+  [[service_name | upper | replace("-", "_")]]_DB_NAME: test
+
+cache:
+  key: "${CI_JOB_NAME}"
+  paths:
+    - .cache/pip
+    - .venv
+
+.test:
+  services:
+    - name: mongo:4.4.4
+      alias: banter-bus-database
+  variables:
+    MONGO_INITDB_ROOT_USERNAME: banterbus
+    MONGO_INITDB_ROOT_PASSWORD: banterbus
+    MONGO_INITDB_DATABASE: test
+    FF_NETWORK_PER_BUILD: 1
+
+stages:
+  - pre
+  - test
+  - post-test
+  - pre-publish
+  - publish
+
+before_script:
+  - pip download --dest=${PIP_DOWNLOAD_DIR} poetry
+  - pip install --find-links=${PIP_DOWNLOAD_DIR} poetry
+  - poetry config virtualenvs.in-project true
+  - poetry install -vv
+
+publish:docker-test:
+  stage: pre
+  only:
+    - main
+  image: docker
+  services:
+    - docker:dind
+  before_script: []
+  script:
+    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+    - docker build -f Dockerfile --target production -t ${CI_REGISTRY_IMAGE}:test .
+    - docker push ${CI_REGISTRY_IMAGE}:test
+
+test:lint:
+  stage: test
+  only:
+    - merge_request
+  script:
+    - make lint
+
+test:unit-tests:
+  stage: test
+  only:
+    - merge_request
+  script:
+    - make unit_tests
+
+test:coverage:
+  stage: test
+  only:
+    - main
+    - merge_request
+  extends:
+    - .test
+  script:
+    - make coverage
+  coverage: '/^TOTAL.+?(\S+\%)$/'
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
+      cobertura: coverage.xml
+
+test:integration-tests:
+  stage: test
+  only:
+    - merge_request
+  extends:
+    - .test
+  script:
+    - make integration_tests
+
+edit:service-yaml:
+  stage: pre-publish
+  image:
+    name: mikefarah/yq
+    entrypoint: [""]
+  only:
+    - main
+  before_script: []
+  script:
+    - export RANDOM_NAME=$(echo $RANDOM | md5sum | head -c 8; echo)
+    - export RANDOM_STR="[[service_name]]-$RANDOM_NAME"
+    - yq -i e ".spec.template.metadata.name = \"$RANDOM_STR\"" service.yaml
+  artifacts:
+    paths:
+      - service.yaml
+
+publish:cloud-run:
+  stage: publish
+  image: google/cloud-sdk
+  only:
+    - main
+  services:
+    - docker:dind
+  dependencies:
+    - publish:docker-test
+    - edit:service-yaml
+  before_script: []
+  script:
+    - cat $GCP_CLOUD_BUILD_KEY | docker login -u _json_key --password-stdin https://eu.gcr.io
+    - gcloud auth activate-service-account --key-file $GCP_CLOUD_BUILD_KEY
+    - gcloud config set project $GCP_PROJECT_ID
+    - docker pull ${CI_REGISTRY_IMAGE}:test
+    - docker tag ${CI_REGISTRY_IMAGE}:test eu.gcr.io/$GCP_PROJECT_ID/[[service_name]]
+    - docker push eu.gcr.io/$GCP_PROJECT_ID/[[service_name]]
+    - gcloud run services replace --platform=managed service.yaml
