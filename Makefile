@@ -47,6 +47,10 @@ install-hooks: ## Install pre commit hooks
 lint: ## Run the lint steps (pre-commit hook)
 	@poetry run pre-commit run --all-files
 
+.PHONY: pull-template-updates
+pull-template-updates: ## Pull updates from upstream template
+	@poetry run copier update
+
 .PHONY: clean
 clean: ### Clean all temporary files
 	@find . -type f -name '*.pyc' -delete
