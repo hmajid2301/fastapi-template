@@ -2,7 +2,7 @@
   "name": "[[service_title]]",
   "shutdownAction": "stopCompose",
   "dockerComposeFile": ["../docker-compose.yml", "docker-compose.dev.yml"],
-  "service": "api",
+  "service": "app",
   "workspaceFolder": "/app",
   "initializeCommand": "bash .devcontainer/pre-build-script.sh",
   "onCreateCommand": "bash /app/.devcontainer/post-build-script.sh",
