@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2021-12-30
+### Fixed
+- Exclude `CHANGELOG.md` and `README.md` so it doesn't get copied over to templates.
+
 ## [0.1.1] - 2021-12-29
 ### Added
 - `.devcontainer` files to gitignore.
@@ -18,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Release.
 
-[unreleased]: https://gitlab.com/banter-bus/fastapi-template/compare/0.1.1...main
+[unreleased]: https://gitlab.com/banter-bus/fastapi-template/compare/0.1.2...main
+[0.1.2]: https://gitlab.com/banter-bus/fastapi-template/compare/0.1....0.1.1
 [0.1.1]: https://gitlab.com/banter-bus/fastapi-template/compare/0.1.1...0.1.0
 [0.1.0]: https://gitlab.com/banter-bus/fastapi-template/-/tags/0.1.0

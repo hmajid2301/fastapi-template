@@ -26,3 +26,5 @@ _exclude:
   - copier.yaml
   - __pycache__
   - .git
+  - CHANGELOG.md
+  - README.md
