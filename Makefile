@@ -41,7 +41,7 @@ coverage: ## Run the integration tests with code coverage report generated
 
 .PHONY: install-hooks
 install-hooks: ## Install pre commit hooks
-	@poetry pre-commit install
+	@poetry run pre-commit install
 
 .PHONY: lint
 lint: ## Run the lint steps (pre-commit hook)

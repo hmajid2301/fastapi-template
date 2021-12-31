@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `copier` to deps and `update-template` make target to pull latest changes.
 
+### Fixed
+- Makefile target `install-hooks` missing run in `poetry run`.
+
 ## [0.1.2] - 2021-12-30
 ### Fixed
 - Exclude `CHANGELOG.md` and `README.md` so it doesn't get copied over to templates.
