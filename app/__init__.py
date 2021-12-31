@@ -1,9 +1,8 @@
 import uvicorn
 
 from app.core.config import get_settings
-from app.main import application
+from app.main import app
 
-app = application  # noqa
 
 if __name__ == "__main__":
     config = get_settings()

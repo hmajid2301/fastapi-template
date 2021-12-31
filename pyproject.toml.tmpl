@@ -6,13 +6,7 @@ authors = ["Haseeb Majid <hello@haseebmajid.dev>"]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
-structlog = "^21.2.0"
-beanie = "^1.8.5"
-uvicorn = { extras = ["standard"], version = "^0.16.0" }
-httpx = "^0.21.1"
-pydantic = { extras = ["dotenv"], version = "^1.8.2" }
-dnspython = "^2.1.0"
-fastapi-health = "^0.4.0"
+omnibus = { git = "https://gitlab.com/banter-bus/omnibus.git", tag = "0.1.0" }
 
 [tool.poetry.dev-dependencies]
 black = "^21.11b1"

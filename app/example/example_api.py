@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from omnibus.log.logger import get_logger
 from structlog.stdlib import BoundLogger
 
-from app.core.logger import get_logger
 from app.example.example_api_models import ExampleOut
 from app.example.example_exceptions import ExampleNotFound
 from app.example.example_factory import get_example_service

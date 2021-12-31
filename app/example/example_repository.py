@@ -1,4 +1,5 @@
-from app.core.repository import AbstractRepository
+from omnibus.database.repository import AbstractRepository
+
 from app.example.example_exceptions import ExampleNotFound
 from app.example.example_models import Example
 
