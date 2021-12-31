@@ -24,7 +24,7 @@ ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
 FROM base as builder
 
-RUN apt-get update && apt-get install curl make -y
+RUN apt-get update && apt-get install curl make git -y
 RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
 
 WORKDIR $PYSETUP_PATH
