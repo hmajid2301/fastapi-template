@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from omnibus.log.logger import get_logger
 from structlog.stdlib import BoundLogger
 
+from app.auth import get_auth
 from app.example.example_api_models import ExampleOut
 from app.example.example_exceptions import ExampleNotFound
 from app.example.example_factory import get_example_service
@@ -18,7 +19,7 @@ router = APIRouter(
     status_code=status.HTTP_200_OK,
     response_model=ExampleOut,
     response_model_exclude_none=True,
-    operation_id="get_example",
+    dependencies=[Depends(get_auth())],
 )
 async def get_example(
     example_id: str,
