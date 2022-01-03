@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2] - 2022-01-03
+### Fixed
+- Update `service.yaml` file with latest values for auth i.e. client id and use auth.
+
 ## [0.2.1] - 2022-01-03
 ### Added
 - `auth.py` which is a factory function which will validate a JWT token for an incoming request.
@@ -40,7 +44,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Release.
 
-[unreleased]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.1...main
+[unreleased]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.2...main
+[0.2.2]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.2...0.2.1
 [0.2.1]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.1...0.2.0
 [0.2.0]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.0...0.1.2
 [0.1.2]: https://gitlab.com/banter-bus/fastapi-template/compare/0.1.2...0.1.1
