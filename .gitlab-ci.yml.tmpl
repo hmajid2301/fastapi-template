@@ -120,10 +120,10 @@ publish:cloud-run:
     - edit:service-yaml
   before_script: []
   script:
-    - cat $GCP_CLOUD_BUILD_KEY | docker login -u _json_key --password-stdin https://eu.gcr.io
-    - gcloud auth activate-service-account --key-file $GCP_CLOUD_BUILD_KEY
-    - gcloud config set project $GCP_PROJECT_ID
+    - cat ${GCP_CLOUD_BUILD_KEY} | docker login -u _json_key --password-stdin https://eu.gcr.io
+    - gcloud auth activate-service-account --key-file ${GCP_CLOUD_BUILD_KEY}
+    - gcloud config set project ${GCP_PROJECT_ID}
     - docker pull ${CI_REGISTRY_IMAGE}:test
-    - docker tag ${CI_REGISTRY_IMAGE}:test eu.gcr.io/$GCP_PROJECT_ID/[[service_name]]
-    - docker push eu.gcr.io/$GCP_PROJECT_ID/[[service_name]]
+    - docker tag ${CI_REGISTRY_IMAGE}:test eu.gcr.io/${GCP_PROJECT_ID}/[[service_name]]
+    - docker push eu.gcr.io/${GCP_PROJECT_ID}/[[service_name]]
     - gcloud run services replace --platform=managed service.yaml
