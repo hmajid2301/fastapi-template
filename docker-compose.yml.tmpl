@@ -24,9 +24,9 @@ services:
     container_name: banter-bus-database
     image: mongo:4.4.4
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=banterbus
-      - MONGO_INITDB_ROOT_PASSWORD=banterbus
-      - MONGO_INITDB_DATABASE=banterbus
+      MONGO_INITDB_ROOT_USERNAME: banterbus
+      MONGO_INITDB_ROOT_PASSWORD: banterbus
+      MONGO_INITDB_DATABASE: banterbus
     volumes:
       - /data/db
     ports:
@@ -38,7 +38,7 @@ services:
     depends_on:
       - database
     environment:
-      - MONGOCLIENT_DEFAULT_CONNECTION_URL=mongodb://banterbus:banterbus@banter-bus-database:27017
+      MONGOCLIENT_DEFAULT_CONNECTION_URL: mongodb://banterbus:banterbus@banter-bus-database:27017
     volumes:
       - /data/db mongoclient/mongoclient
     ports:

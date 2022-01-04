@@ -48,8 +48,8 @@ FROM builder as development
 
 ENV [[service_prefix]]_ENVIRONMENT=development
 
-COPY ./ /app
 RUN poetry install
+COPY ./ /app
 
 WORKDIR /app
 EXPOSE 8080
