@@ -5,11 +5,6 @@ variables:
   PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/pip"
   PIP_DOWNLOAD_DIR: ".pip"
   DOCKER_HOST: tcp://docker:2375
-  [[service_prefix]]_DB_USERNAME: banterbus
-  [[service_prefix]]_DB_PASSWORD: banterbus
-  [[service_prefix]]_DB_HOST: banter-bus-database
-  [[service_prefix]]_DB_PORT: 27017
-  [[service_prefix]]_DB_NAME: test
 
 cache:
   key: "${CI_COMMIT_SHA}"
@@ -35,6 +30,7 @@ stages:
   - publish
 
 before_script:
+  - export $(grep -v '^#' .env.test | xargs)
   - pip download --dest=${PIP_DOWNLOAD_DIR} poetry
   - pip install --find-links=${PIP_DOWNLOAD_DIR} poetry
   - poetry config virtualenvs.in-project true

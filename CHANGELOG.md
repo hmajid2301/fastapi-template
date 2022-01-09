@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Reference ENV variables using `${VAR}` rather than `$VAR`.
 - Bump `omnibus` to latest version.
+- `docker-compose.yml` to use `.env.test` file and in `.gitlab-ci.yml`.
 
 ## [0.2.4] - 2022-01-04
 ### Changed
