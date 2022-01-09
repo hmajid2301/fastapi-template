@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Reference ENV variables using `${VAR}` rather than `$VAR`.
+- Bump `omnibus` to latest version.
 
 ## [0.2.4] - 2022-01-04
 ### Changed
