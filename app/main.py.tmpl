@@ -4,6 +4,7 @@ from fastapi_health import health
 from motor import motor_asyncio
 from omnibus.app import setup_app
 from omnibus.middleware.exceptions import catch_exceptions_http
+from omnibus.operation_id import use_route_names_as_operation_ids
 
 from app.core.config import get_settings
 from app.healthcheck import db_healthcheck
@@ -18,3 +19,4 @@ async def startup():
         app=app, get_settings=get_settings, document_models=[Example], healthcheck=db_healthcheck
     )
     app.middleware("http")(catch_exceptions_http)
+    use_route_names_as_operation_ids(app)
