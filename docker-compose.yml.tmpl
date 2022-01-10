@@ -7,8 +7,12 @@ services:
       context: .
       dockerfile: Dockerfile
       target: development
-    env_file:
-      - .env.test
+    environment:
+      [[service_prefix]]_DB_USERNAME: banterbus
+      [[service_prefix]]_DB_PASSWORD: banterbus
+      [[service_prefix]]_DB_HOST: banter-bus-database
+      [[service_prefix]]_DB_PORT: 27017
+      [[service_prefix]]_DB_NAME: test
     ports:
       - 8080:8080
     volumes:
