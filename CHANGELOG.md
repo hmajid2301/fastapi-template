@@ -70,7 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial Release.
 
 [unreleased]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.6...main
-[0.2.5]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.6...0.2.5
+[0.2.6]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.6...0.2.5
 [0.2.5]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.5...0.2.4
 [0.2.4]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.4...0.2.3
 [0.2.3]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.3...0.2.2
