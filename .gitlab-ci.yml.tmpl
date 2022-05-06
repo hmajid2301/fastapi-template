@@ -80,8 +80,10 @@ test:coverage:
   artifacts:
     when: always
     reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
       junit: report.xml
-      cobertura: coverage.xml
 
 test:integration-tests:
   stage: test
