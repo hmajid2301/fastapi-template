@@ -13,6 +13,8 @@ services:
       {{service_prefix}}_DB_HOST: banter-bus-database
       {{service_prefix}}_DB_PORT: 27017
       {{service_prefix}}_DB_NAME: test
+      {{service_prefix}}_CLIENT_ID: client_id
+      {{service_prefix}}_USE_AUTH: "False"
     ports:
       - 127.0.0.1:8080:8080
     volumes:

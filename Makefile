@@ -12,7 +12,7 @@ start: ## Start the application "stack" using Docker
 .PHONY: start-deps
 start-deps: ## Start all the Docker containers that this app depends on directly
 	@docker compose pull
-	@docker compose up --build -d database database-gui database-seed message-queue management-api
+	@docker compose up --build -d database database-gui
 
 .PHONY: unit_tests
 unit_tests: ## Run all the unit tests

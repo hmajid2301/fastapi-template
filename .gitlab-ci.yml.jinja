@@ -96,7 +96,7 @@ publish:cloud-run:
   only:
     - main
   dependencies:
-    - publish:docker-test
+    - publish:docker:prod
     - edit:service-yaml
   before_script: []
   script:

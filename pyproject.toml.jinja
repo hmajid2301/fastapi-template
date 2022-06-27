@@ -22,7 +22,9 @@ factory-boy = "^3.2.1"
 aiohttp = "^3.8.1"
 pytest-cov = "^3.0.0"
 pactman = "^2.30.0"
-copier = "^6.1.0"
+mypy = "^0.930"
+coverage = "^6.4.1"
+pyupgrade = "^2.34.0"
 
 [tool.isort]
 profile = "black"
@@ -33,7 +35,6 @@ src_paths = ["app", "tests"]
 line-length = 120
 
 [tool.mypy]
-exclude = "app/clients/management_api/**"
 plugins = ["pydantic.mypy"]
 follow_imports = "silent"
 warn_unreachable = true
