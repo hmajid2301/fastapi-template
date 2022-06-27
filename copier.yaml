@@ -6,17 +6,17 @@ service_name:
 service_title:
   type: str
   help: "Title of your project (title case like 'Banter Bus API')"
-  default: "[[service_name | title | replace('-', ' ')]]"
+  default: "{{service_name | title | replace('-', ' ')}}"
 
 service_prefix:
   type: str
   help: "Prefix of environment variables for this service (upper case like 'BANTER_BUS_API')"
-  default: "[[service_name | upper | replace('-', '_')]]"
+  default: "{{service_name | upper | replace('-', '_')}}"
 
 database_name:
   type: str
   help: "Your database name (lowercase, hypens replaced with underscore and no banter-bus like 'api')"
-  default: "[[service_name | replace('-', '_') | replace('banter_bus_', '')]]"
+  default: "{{service_name | replace('-', '_') | replace('banter_bus_', '')}}"
 
 short_description:
   type: str

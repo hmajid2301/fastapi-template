@@ -1,22 +1,22 @@
-version: "3.8"
-
 services:
   api:
-    container_name: [[service_name]]
+    container_name: {{service_name}}
     build:
       context: .
       dockerfile: Dockerfile
       target: development
+      cache_from:
+        - registry.gitlab.com/banter-bus/{{service_name}}:development
     environment:
-      [[service_prefix]]_DB_USERNAME: banterbus
-      [[service_prefix]]_DB_PASSWORD: banterbus
-      [[service_prefix]]_DB_HOST: banter-bus-database
-      [[service_prefix]]_DB_PORT: 27017
-      [[service_prefix]]_DB_NAME: test
+      {{service_prefix}}_DB_USERNAME: banterbus
+      {{service_prefix}}_DB_PASSWORD: banterbus
+      {{service_prefix}}_DB_HOST: banter-bus-database
+      {{service_prefix}}_DB_PORT: 27017
+      {{service_prefix}}_DB_NAME: test
     ports:
-      - 8080:8080
+      - 127.0.0.1:8080:8080
     volumes:
-       - ./:/app
+      - ./:/app
     depends_on:
       - database
 
@@ -30,7 +30,7 @@ services:
     volumes:
       - /data/db
     ports:
-      - 27017:27017
+      - 127.0.0.1:27017:27017
 
   database-gui:
     container_name: banter-bus-database-gui
@@ -42,4 +42,4 @@ services:
     volumes:
       - /data/db mongoclient/mongoclient
     ports:
-      - 4000:3000
+      - 127.0.0.1:4000:3000

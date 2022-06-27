@@ -1,27 +1,27 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: [[service_name]]
+  name: {{service_name}}
   namespace: "78358389381"
-  selfLink: /apis/serving.knative.dev/v1/namespaces/78358389381/services/[[service_name]]
-  creationTimestamp: [[iso_date]]
+  selfLink: /apis/serving.knative.dev/v1/namespaces/78358389381/services/{{service_name}}
+  creationTimestamp: {{iso_date}}
   labels:
     cloud.googleapis.com/location: europe-west1
   annotations:
     run.googleapis.com/client-name: cloud-console
     serving.knative.dev/creator: hmajid2301@gmail.com
     serving.knative.dev/lastModifier: hmajid2301@gmail.com
-    client.knative.dev/user-image: eu.gcr.io/banter-bus/[[service_name]]
+    client.knative.dev/user-image: eu.gcr.io/banter-bus/{{service_name}}
     run.googleapis.com/launch-stage: BETA
     run.googleapis.com/ingress: all
     run.googleapis.com/ingress-status: all
 spec:
   template:
     metadata:
-      name: [[service_name]]
+      name: {{service_name}}
       annotations:
         run.googleapis.com/client-name: cloud-console
-        client.knative.dev/user-image: eu.gcr.io/banter-bus/[[service_name]]
+        client.knative.dev/user-image: eu.gcr.io/banter-bus/{{service_name}}
         run.googleapis.com/execution-environment: gen2
         autoscaling.knative.dev/maxScale: "3"
     spec:
@@ -29,32 +29,32 @@ spec:
       timeoutSeconds: 300
       serviceAccountName: 78358389381-compute@developer.gserviceaccount.com
       containers:
-        - image: eu.gcr.io/banter-bus/[[service_name]]
+        - image: eu.gcr.io/banter-bus/{{service_name}}
           ports:
             - name: http1
               containerPort: 8080
           env:
-            - name: [[service_prefix]]_DB_USERNAME
+            - name: {{service_prefix}}_DB_USERNAME
               value: banter-bus
-            - name: [[service_prefix]]_DB_HOST
+            - name: {{service_prefix}}_DB_HOST
               value: banter-bus-database.ffljl.mongodb.net
-            - name: [[service_prefix]]_DB_NAME
-              value: [[database_name]]
-            - name: [[service_prefix]]_URL
+            - name: {{service_prefix}}_DB_NAME
+              value: {{database_name}}
+            - name: {{service_prefix}}_URL
               value: https://management.api.banterbus.games
-            - name: [[service_prefix]]_SCHEMA
+            - name: {{service_prefix}}_SCHEMA
               value: mongodb+srv
-            - name: [[service_prefix]]_ENVIRONMENT
+            - name: {{service_prefix}}_ENVIRONMENT
               value: production
-            - name: [[service_prefix]]_CORS
+            - name: {{service_prefix}}_CORS
               value: '["*"]'
-            - name: [[service_prefix]]_REGEX_CORS
+            - name: {{service_prefix}}_REGEX_CORS
               value: '[""]'
-            - name: [[service_prefix]]_CLIENT_ID
+            - name: {{service_prefix}}_CLIENT_ID
               value: 78358389381-o5nq31qc9ntq5evfg03n4565cjbf8qpo.apps.googleusercontent.com
-            - name: [[service_prefix]]_USE_AUTH
+            - name: {{service_prefix}}_USE_AUTH
               value: "True"
-            - name: [[service_prefix]]_DB_PASSWORD
+            - name: {{service_prefix}}_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: latest
@@ -74,6 +74,6 @@ status:
       status: "True"
     - type: RoutesReady
       status: "True"
-  url: https://[[service_name]]-x6ccwlffzq-ew.a.run.app
+  url: https://{{service_name}}-x6ccwlffzq-ew.a.run.app
   address:
-    url: https://[[service_name]]-x6ccwlffzq-ew.a.run.app
+    url: https://{{service_name}}-x6ccwlffzq-ew.a.run.app

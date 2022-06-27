@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2022-06-27
+### Changed
+- Upgraded to python 3.10.
+- Upgraded to copier version 6 syntax.
+
 ## [0.2.6] - 2022-05-06
 ### Fixed
 - Broken coverage job in Gitlab CI `coberature` is not a report type anymore.
@@ -69,7 +74,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Release.
 
-[unreleased]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.6...main
+[unreleased]: https://gitlab.com/banter-bus/fastapi-template/compare/0.3.0...main
+[0.3.0]: https://gitlab.com/banter-bus/fastapi-template/compare/0.3.0...0.2.6
 [0.2.6]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.6...0.2.5
 [0.2.5]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.5...0.2.4
 [0.2.4]: https://gitlab.com/banter-bus/fastapi-template/compare/0.2.4...0.2.3

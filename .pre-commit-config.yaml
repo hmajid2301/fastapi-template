@@ -4,11 +4,6 @@ repos:
     hooks:
       - id: check-yaml
         args: ["--allow-multiple-documents"]
-  - repo: "https://github.com/pre-commit/mirrors-mypy"
-    rev: "v0.910-1"
-    hooks:
-      - id: "mypy"
-        additional_dependencies: []
   - repo: local
     hooks:
       - id: forbidden-files
@@ -29,5 +24,17 @@ repos:
       - id: isort
         name: isort
         entry: poetry run isort --settings-path=.
+        language: system
+        types: [python]
+      - id: pyupgrade
+        name: pyupgrade
+        entry: poetry run pyupgrade
+        language: system
+        types: [python]
+        args: [--py310-plus]
+      - id: mypy
+        name: mypy
+        description: Check python types.
+        entry: poetry run mypy
         language: system
         types: [python]

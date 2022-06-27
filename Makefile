@@ -7,24 +7,12 @@ help: ## Generates a help README
 
 .PHONY: start
 start: ## Start the application "stack" using Docker
-	@docker-compose up --build
+	@docker compose up --build
 
 .PHONY: start-deps
 start-deps: ## Start all the Docker containers that this app depends on directly
-	@docker-compose pull
-	@docker-compose up --build -d database database-gui
-
-.PHONY: unit_tests_docker
-unit_tests_docker: ## Run unit tests in Docker container
-	@docker-compose run app make unit_tests
-
-.PHONY: integration_tests_docker
-integration_tests_docker: ## Run integration tests in Docker container
-	@docker-compose run app make integration_tests
-
-.PHONY: coverage_docker
-coverage_docker: ## Run coverage tests in Docker container
-	@docker-compose run app make coverage
+	@docker compose pull
+	@docker compose up --build -d database database-gui database-seed message-queue management-api
 
 .PHONY: unit_tests
 unit_tests: ## Run all the unit tests

@@ -10,7 +10,7 @@ from app.core.config import get_settings
 from app.healthcheck import db_healthcheck
 from app.example.example_models import Example
 
-app = FastAPI(title="[[service_name]]")
+app = FastAPI(title="{{service_name}}")
 
 
 @app.on_event("startup")
