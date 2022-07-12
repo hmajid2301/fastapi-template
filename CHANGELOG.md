@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- `Dockerfile` to use new simplified version, removes lots of poetry specific env variables.
+   - So it can work with new devcontainer setup, such as installing `sudo` in the development stage. 
+
 ### Removed
 - Redundant `.devcontainer` files, we are now using `dotfiles` feature of VSCode.
 
@@ -22,7 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.6] - 2022-05-06
 ### Fixed
 - Broken coverage job in Gitlab CI `coberature` is not a report type anymore.
-
 
 ## [0.2.5] - 2022-05-05
 ### Changed

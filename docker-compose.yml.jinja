@@ -8,6 +8,7 @@ services:
       cache_from:
         - registry.gitlab.com/banter-bus/{{service_name}}:development
     environment:
+      XDG_DATA_HOME: /app/home/commandhistory
       {{service_prefix}}_DB_USERNAME: banterbus
       {{service_prefix}}_DB_PASSWORD: banterbus
       {{service_prefix}}_DB_HOST: banter-bus-database
@@ -15,10 +16,14 @@ services:
       {{service_prefix}}_DB_NAME: test
       {{service_prefix}}_CLIENT_ID: client_id
       {{service_prefix}}_USE_AUTH: "False"
+      {{service_prefix}}_WEB_PORT: 8080
+      {{service_prefix}}_WEB_HOST: "0.0.0.0"
     ports:
       - 127.0.0.1:8080:8080
     volumes:
       - ./:/app
+      - /app/.venv/ # This stops local .venv getting mounted
+      - app-history:/app/home/commandhistory
     depends_on:
       - database
 
